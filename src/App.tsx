@@ -18,10 +18,6 @@ export const App = () => {
     setText(e.target.value);
   };
 
-  const handleSort = (filter: Filter) => {
-    setFilter(filter);
-  };
-  
   const handleSubmit = () => {
     if (!text) return;
 
@@ -96,6 +92,23 @@ export const App = () => {
       return newTodos;
     });
   }
+  const handleSort = (filter: Filter) => {
+    setFilter(filter);
+  };
+  const filteredTodo = todos.filter((todo) => {
+    switch(filter){
+      case 'all':
+        return !todo.removed;
+      case 'checked':
+        return todo.checked && !todo.removed;
+      case 'unchecked':
+        return !todo.checked && !todo.removed;
+      case 'removed':
+        return todo.removed;
+      default:
+        return todo;
+    }
+  });
 
   return (
     <div>
@@ -114,15 +127,19 @@ export const App = () => {
         >
         <input
           type="text"
-          // text ステートが持っている入力中のテキストの値をvalueとして表示
           value={text}
-          // onChange イベント(=入力テキストの変化)をtextステートに反映する
+          disabled={filter === 'checked' || filter === 'removed'}
           onChange={(e) => handleChange(e)}
         />
-        <input type="submit" value="追加" onSubmit={handleSubmit} />
+        <input 
+          type="submit"
+          value="追加"
+          disabled={filter === 'checked' || filter === 'removed'}
+          onSubmit={handleSubmit}
+        />
       </form>
       <ul>
-        {todos.map((todo) => {
+        {filteredTodo.map((todo) => {
           return (
           <li key={todo.id}>
             <input
