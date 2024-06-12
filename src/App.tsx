@@ -18,6 +18,22 @@ export const App = () => {
     setText(e.target.value);
   };
 
+  const handleTodo = <K extends keyof Todo, V extends Todo[K]>(
+    id: number,
+    key: K,
+    value: V
+  ) => {
+    setTodos((todos) => {
+      const newTodos = todos.map((todo) => {
+        if (todo.id === id) {
+          return { ...todo, [key]: value };
+        } else {
+          return todo;
+        }
+      });
+      return newTodos;
+    });
+  }
   const handleSubmit = () => {
     if (!text) return;
 
@@ -159,15 +175,15 @@ export const App = () => {
               disabled={todo.removed}
               checked={todo.checked}
               // 呼び出し側で checked フラグを反転させる
-              onChange={() => handleCheck(todo.id, !todo.checked)}
+              onChange={() => handleTodo(todo.id, 'checked', !todo.checked)}
             />
             <input 
               type='text'
               disabled={todo.checked || todo.removed}
               value={todo.value}
-              onChange={(e) => handleEdit(todo.id, e.target.value)}
+              onChange={(e) => handleTodo(todo.id, 'value', e.target.value)}
             />
-            <button onClick={() => handleRemove(todo.id, !todo.removed)}>
+            <button onClick={() => handleTodo(todo.id, 'removed', !todo.removed)}>
               {todo.removed ? '復元' : '削除'}
             </button>
           </li>
