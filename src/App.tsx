@@ -1,13 +1,13 @@
 import { useState } from 'react';
+import { FormDialog }  from './FormDialog';
+// type Todo = {
+//   value: string;
+//   readonly id: number;
+//   checked: boolean;
+//   removed: boolean;
+// };
 
-type Todo = {
-  value: string;
-  readonly id: number;
-  checked: boolean;
-  removed: boolean;
-};
-
-type Filter = 'all' | 'checked' | 'unchecked' | 'removed';
+// type Filter = 'all' | 'checked' | 'unchecked' | 'removed';
 
 export const App = () => {
 
@@ -146,23 +146,11 @@ export const App = () => {
         </button>
       ): (
         filter !== 'checked' && (
-          <form 
-          onSubmit={(e) => {
-            e.preventDefault();
-            handleSubmit();
-          }}
-          >
-          <input
-            type="text"
-            value={text}
-            onChange={(e) => handleChange(e)}
-          />
-          <input 
-            type="submit"
-            value="追加"
-            onSubmit={handleSubmit}
-          />
-          </form>          
+          <FormDialog
+          text={text}
+          onChange={handleChange}
+          onSubmit={handleSubmit}
+          />         
         )
       )}
 
