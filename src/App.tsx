@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { FormDialog }  from './FormDialog';
 import { ActionButton } from './ActionButton';
+import { SideBar } from './SideBar';
 // type Todo = {
 //   value: string;
 //   readonly id: number;
@@ -132,13 +133,7 @@ export const App = () => {
 
   return (
     <div>
-      <select defaultValue="all" onChange={(e) => handleSort(e.target.value as Filter)}>
-        <option value="all">全てのタスク</option>
-        <option value="checked">完了したタスク</option>
-        <option value="unchecked">現在のタスク</option>
-        <option value="removed">ゴミ箱</option>
-      </select>
-      
+      <SideBar onSort={handleSort} />      
       <FormDialog
             text={text}
             onChange={handleChange}
