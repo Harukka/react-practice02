@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { FormDialog }  from './FormDialog';
+import { ActionButton } from './ActionButton';
 // type Todo = {
 //   value: string;
 //   readonly id: number;
@@ -137,23 +138,12 @@ export const App = () => {
         <option value="unchecked">現在のタスク</option>
         <option value="removed">ゴミ箱</option>
       </select>
-      {filter === 'removed' ? (
-        <button
-          onClick={handleEmpty}
-          disabled={todos.filter((todo) => todo.removed).length === 0}
-        >
-          ゴミ箱を空にする
-        </button>
-      ): (
-        filter !== 'checked' && (
-          <FormDialog
-          text={text}
-          onChange={handleChange}
-          onSubmit={handleSubmit}
-          />         
-        )
-      )}
-
+      
+      <FormDialog
+            text={text}
+            onChange={handleChange}
+            onSubmit={handleSubmit}
+      />
       <ul>
         {filteredTodo.map((todo) => {
           return (
@@ -178,6 +168,7 @@ export const App = () => {
         );
         })}
       </ul>
+      <ActionButton todos={todos} onEmpty={handleEmpty} />
     </div>
   );
 };
