@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { FormDialog }  from './FormDialog';
 import { ActionButton } from './ActionButton';
 import { SideBar } from './SideBar';
+import { TodoItem } from './TodoItem';
 // type Todo = {
 //   value: string;
 //   readonly id: number;
@@ -139,30 +140,7 @@ export const App = () => {
             onChange={handleChange}
             onSubmit={handleSubmit}
       />
-      <ul>
-        {filteredTodo.map((todo) => {
-          return (
-          <li key={todo.id}>
-            <input
-              type='checkbox'
-              disabled={todo.removed}
-              checked={todo.checked}
-              // 呼び出し側で checked フラグを反転させる
-              onChange={() => handleTodo(todo.id, 'checked', !todo.checked)}
-            />
-            <input 
-              type='text'
-              disabled={todo.checked || todo.removed}
-              value={todo.value}
-              onChange={(e) => handleTodo(todo.id, 'value', e.target.value)}
-            />
-            <button onClick={() => handleTodo(todo.id, 'removed', !todo.removed)}>
-              {todo.removed ? '復元' : '削除'}
-            </button>
-          </li>
-        );
-        })}
-      </ul>
+      <TodoItem todos={todos} filter={filter} onTodo={handleTodo} />
       <ActionButton todos={todos} onEmpty={handleEmpty} />
     </div>
   );
