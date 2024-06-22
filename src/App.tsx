@@ -3,6 +3,8 @@ import { FormDialog }  from './FormDialog';
 import { ActionButton } from './ActionButton';
 import { SideBar } from './SideBar';
 import { TodoItem } from './TodoItem';
+import { ToolBar } from './ToolBar';
+import GlobalStyles  from '@mui/material/GlobalStyles';
 // type Todo = {
 //   value: string;
 //   readonly id: number;
@@ -134,6 +136,8 @@ export const App = () => {
 
   return (
     <div>
+      <GlobalStyles styles={{ body: { margin: 0, padding: 0} }} />
+      <ToolBar />
       <SideBar onSort={handleSort} />      
       <FormDialog
             text={text}
