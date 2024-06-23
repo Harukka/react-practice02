@@ -137,7 +137,7 @@ export const App = () => {
   return (
     <div>
       <GlobalStyles styles={{ body: { margin: 0, padding: 0} }} />
-      <ToolBar />
+      <ToolBar filter={filter} />
       <SideBar onSort={handleSort} />      
       <FormDialog
             text={text}
