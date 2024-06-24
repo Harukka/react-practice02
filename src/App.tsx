@@ -10,6 +10,12 @@ import { SideBar } from './SideBar';
 import { TodoItem } from './TodoItem';
 import { ToolBar } from './ToolBar';
 
+const [drawerOpen, setDrawerOpen ] = useState(false);
+
+const handleToggleDrawer = () => {
+  setDrawerOpen((drawerOpen) => !drawerOpen);
+};
+
 const theme = createTheme({
   palette: {
     primary: {
