@@ -10,11 +10,6 @@ import { SideBar } from './SideBar';
 import { TodoItem } from './TodoItem';
 import { ToolBar } from './ToolBar';
 
-const [drawerOpen, setDrawerOpen ] = useState(false);
-
-const handleToggleDrawer = () => {
-  setDrawerOpen((drawerOpen) => !drawerOpen);
-};
 
 const theme = createTheme({
   palette: {
@@ -35,6 +30,13 @@ export const App = () => {
   const [text, setText] = useState('');
   const [todos, setTodos] = useState<Todo[]>([]);
   const [filter, setFilter] = useState<Filter>('all');
+
+  const [drawerOpen, setDrawerOpen ] = useState(false);
+
+  const handleToggleDrawer = () => {
+    setDrawerOpen((drawerOpen) => !drawerOpen);
+  };
+    
   const handleChange = ( e: React.ChangeEvent<HTMLInputElement>) => {
     setText(e.target.value);
   };
@@ -153,8 +155,11 @@ export const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles styles={{ body: { margin: 0, padding: 0} }} />
-      <ToolBar filter={filter} />
-      <SideBar onSort={handleSort} />      
+      <ToolBar filter={filter} onToggleDrawer={handleToggleDrawer} />
+      <SideBar 
+        drawerOpen={drawerOpen}
+        onToggleDrawer={handleToggleDrawer}
+        onSort={handleSort} />      
       <FormDialog
             text={text}
             onChange={handleChange}
