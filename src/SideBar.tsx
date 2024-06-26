@@ -16,6 +16,7 @@ import { indigo, lightBlue, pink} from '@mui/material/colors';
 
 type Props = {
     drawerOpen: boolean;
+    onToggleQR: () => void;
     onToggleDrawer: () => void;
     onSort : (filter: Filter ) => void;
 };
@@ -82,7 +83,18 @@ export const SideBar = (props: Props) => (
 
                     </ListItemButton>
                 </ListItem>
-                <Divider /> 
+                <Divider />
+                <ListItem disablePadding>
+                    <ListItemButton
+                        aria-label='list-share'
+                        onClick={props.onToggleQR}
+                    >
+                        <ListItemIcon>
+                            <Icon>share</Icon>
+                        </ListItemIcon>
+                        <ListItemText secondary='このアプリを共有' />
+                    </ListItemButton>
+                </ListItem> 
             </List>
         </DrawerList>
     </Drawer>
