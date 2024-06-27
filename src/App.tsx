@@ -46,7 +46,8 @@ export const App = () => {
     setDrawerOpen((drawerOpen) => !drawerOpen);
   };
     
-  const handleChange = ( e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = ( e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setText(e.target.value);
   };
 
@@ -72,8 +73,11 @@ export const App = () => {
     });
   }
   const handleSubmit = () => {
-    if (!text) return;
-
+    if (!text) {
+      //何も入力されなかった時
+      setDialogOpen((dialogOpen) => !dialogOpen)
+      return;
+    }
     // 新しいTodoを作成
     // 明示的に型注釈をつけてオブジェクトの型を限定する
     const newTodo: Todo = {
@@ -90,7 +94,7 @@ export const App = () => {
     setTodos((todos) => [newTodo, ...todos]);
     // フォームへの入力をクリアする
     setText('');
-
+    setDialogOpen((dialogOpen) => !todos);
   };
 
   const handleSort = (filter: Filter) => {
@@ -113,8 +117,10 @@ export const App = () => {
       <QR open={qrOpen} onClose={handleToggleQR} />      
       <FormDialog
             text={text}
+            dialogOpen={dialogOpen}
             onChange={handleChange}
             onSubmit={handleSubmit}
+            onToggleDialog={handleToggleDialog}
       />
       <TodoItem todos={todos} filter={filter} onTodo={handleTodo} />
       <ActionButton todos={todos} onEmpty={handleEmpty} />

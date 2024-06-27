@@ -1,7 +1,9 @@
 type Props = {
     text: string;
+    dialogOpen: boolean;
     onSubmit: () => void;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    onToggleDialog: () => void;
 };
 // 名前付きエクスポート
 export const FormDialog = (props: Props) => (
