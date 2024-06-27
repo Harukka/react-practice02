@@ -36,6 +36,8 @@ export const App = () => {
 
   const [qrOpen, setQrOpen] = useState(false);
 
+  const [dialogOpen, setDialogOpen] = useState(false);
+
   const handleToggleQR = () => {
     setQrOpen((qrOpen) => !qrOpen);
   };
@@ -46,6 +48,11 @@ export const App = () => {
     
   const handleChange = ( e: React.ChangeEvent<HTMLInputElement>) => {
     setText(e.target.value);
+  };
+
+  const handleToggleDialog = () => {
+    setDialogOpen((dialogOpen) => !dialogOpen);
+    setText('');
   };
 
   const handleTodo = <K extends keyof Todo, V extends Todo[K]>(
